@@ -1,9 +1,6 @@
 import json
 import os
-from google import genai
-from google.genai import types
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+import requests
 
 def _metric_fallback(file_path: str, metrics: dict, risk_score: float) -> dict:
     """Generate a meaningful fallback explanation purely from available metrics."""
@@ -55,12 +52,11 @@ def _metric_fallback(file_path: str, metrics: dict, risk_score: float) -> dict:
 
     return {"why": why, "test_suggestions": test_suggestions}
 
+
 def generate_risk_explanation(file_path: str, code: str, metrics: dict, risk_score: float) -> dict:
     gemini_key = os.getenv("GEMINI_API_KEY")
     if not gemini_key:
         return _metric_fallback(file_path, metrics, risk_score)
-
-    client = genai.Client(api_key=gemini_key)
 
     prompt = f"""You are a senior software engineer performing a code review.
 Analyze this file and its risk metrics. Our XGBoost model gave it a defect risk score of {risk_score*100:.1f}%.
@@ -75,16 +71,21 @@ Respond in valid JSON with exactly two keys:
 1. "why": 1-2 plain-English sentences explaining why this file is risky based on these metrics.
 2. "test_suggestions": 1-2 specific, actionable recommendations for what to test or review.
 """
+
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.2,
-            ),
-        )
-        result = json.loads(response.text)
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_key}"
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "temperature": 0.2
+            }
+        }
+        resp = requests.post(url, json=payload, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+        text = data["candidates"][0]["content"]["parts"][0]["text"]
+        result = json.loads(text)
         why = result.get("why", "").strip()
         suggestions = result.get("test_suggestions", "").strip()
 
