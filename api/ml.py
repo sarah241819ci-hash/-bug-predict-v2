@@ -67,6 +67,9 @@ def predict_risk(metrics: dict) -> float:
 
     # Build numpy array — no pandas needed for inference
     row = np.array([[feature_values.get(feat, 0.0) for feat in _expected_features]], dtype=np.float32)
-    dmatrix = xgb.DMatrix(row, feature_names=_expected_features)
-    proba = _bst.get_booster().predict(dmatrix)[0]
+    try:
+        proba = _bst.predict_proba(row)[0][1]
+    except Exception:
+        dmatrix = xgb.DMatrix(row, feature_names=_expected_features)
+        proba = _bst.get_booster().predict(dmatrix)[0]
     return float(proba)
