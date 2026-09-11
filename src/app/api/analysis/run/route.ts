@@ -20,11 +20,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "URL is required" }, { status: 400 });
     }
 
-    // Call the Python backend directly (bypasses Next.js rewrite proxy timeout)
+    // In development: call local FastAPI server
+    // In production: call Vercel Python serverless function directly via full URL
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://bug-predict-ai.vercel.app";
     const pythonUrl =
       process.env.NODE_ENV === "development"
         ? "http://127.0.0.1:5328/api/python/analyze"
-        : `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/python/analyze`;
+        : `${appUrl}/api/python/analyze`;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 240_000); // 4 min timeout
