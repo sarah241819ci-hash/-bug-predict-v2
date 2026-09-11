@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String     @id @default(uuid())
+  name          String?
+  email         String     @unique
+  password_hash String
+  created_at    DateTime   @default(now())
+  analyses      Analysis[]
+}
+
+model Analysis {
+  id              String         @id @default(uuid())
+  user_id         String
+  repository_url  String
+  repository_name String
+  overall_risk    Float          @default(0)
+  risk_level      String         @default("LOW") // LOW, MEDIUM, HIGH
+  created_at      DateTime       @default(now())
+  user            User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  files           AnalysisFile[]
+}
+
+model AnalysisFile {
+  id               String   @id @default(uuid())
+  analysis_id      String
+  file_path        String
+  risk_score       Float    @default(0)
+  risk_level       String   @default("LOW")
+  metrics          Json     // stores loc, cyclomatic_complexity, churn, etc.
+  ai_explanation   String?  @db.Text
+  test_suggestions String?  @db.Text
+  analysis         Analysis @relation(fields: [analysis_id], references: [id], onDelete: Cascade)
+}
