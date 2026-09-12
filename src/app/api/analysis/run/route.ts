@@ -21,15 +21,23 @@ export async function POST(request: Request) {
     }
 
     // In development: call local FastAPI server
-    // In production: VERCEL_URL is automatically set by Vercel to THIS deployment's URL
-    // This guarantees we always call the Python function on the SAME project, not a stale hardcoded URL
-    const vercelUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    // In production: Use NEXT_PUBLIC_APP_URL to avoid Vercel's internal deployment protection (401 errors).
+    // Fallback to VERCEL_PROJECT_PRODUCTION_URL if available.
+    let baseAppUrl = "http://localhost:3000";
+    if (process.env.NEXT_PUBLIC_APP_URL) {
+      baseAppUrl = process.env.NEXT_PUBLIC_APP_URL.startsWith("http") 
+        ? process.env.NEXT_PUBLIC_APP_URL 
+        : `https://${process.env.NEXT_PUBLIC_APP_URL}`;
+    } else if (process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL) {
+      baseAppUrl = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
+    } else if (process.env.VERCEL_URL) {
+      baseAppUrl = `https://${process.env.VERCEL_URL}`;
+    }
+
     const pythonUrl =
       process.env.NODE_ENV === "development"
         ? "http://127.0.0.1:5328/api/python/analyze"
-        : `${vercelUrl}/api/python/analyze`;
+        : `${baseAppUrl}/api/python/analyze`;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 240_000); // 4 min timeout
