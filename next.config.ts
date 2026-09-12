@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   // In development: proxy /api/python/* to the local FastAPI server
   // In production: no rewrite needed — Vercel routes /api/* directly to api/index.py
   rewrites: async () => {

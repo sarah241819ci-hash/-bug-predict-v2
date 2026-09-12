@@ -1,15 +1,11 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Bug Predict — Runtime dependencies (deployed to Vercel)
+# Bug Predict — Training-only dependencies
 # ─────────────────────────────────────────────────────────────────────────────
-# These are the ONLY packages needed at runtime (inference + API serving).
-# XGBoost MUST remain here — it loads defect_model.json for every prediction.
-# Do NOT remove xgboost to save bundle size. It IS the prediction engine.
+# These packages are ONLY needed to run api/train_model.py locally.
+# They are NOT deployed to Vercel. Do not add them to requirements.txt.
+# Run training with: uv run python -m api.train_model
 # ─────────────────────────────────────────────────────────────────────────────
-fastapi==0.110.0
-pydantic==2.6.4
-requests==2.31.0
+pandas==2.2.1
+scikit-learn==1.4.1.post1
 xgboost==1.7.6
 numpy==1.26.4
-radon==6.0.1
-uvicorn==0.29.0
-python-dotenv==1.0.1
