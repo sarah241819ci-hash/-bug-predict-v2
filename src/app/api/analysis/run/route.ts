@@ -21,12 +21,15 @@ export async function POST(request: Request) {
     }
 
     // In development: call local FastAPI server
-    // In production: call Vercel Python serverless function directly via full URL
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://bug-predict-ai.vercel.app";
+    // In production: VERCEL_URL is automatically set by Vercel to THIS deployment's URL
+    // This guarantees we always call the Python function on the SAME project, not a stale hardcoded URL
+    const vercelUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
     const pythonUrl =
       process.env.NODE_ENV === "development"
         ? "http://127.0.0.1:5328/api/python/analyze"
-        : `${appUrl}/api/python/analyze`;
+        : `${vercelUrl}/api/python/analyze`;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 240_000); // 4 min timeout
