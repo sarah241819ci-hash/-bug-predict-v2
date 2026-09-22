@@ -1,0 +1,269 @@
+{
+  "dataset_name": "SoftwareDefectDataset.csv",
+  "target": "DEFECT_LABEL",
+  "feature_count": 10,
+  "features": [
+    {
+      "order": 0,
+      "name": "LOC",
+      "type": "float",
+      "description": "Lines of Code",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.520711418673,
+        "std": 0.2894022564555739,
+        "median": 0.53183391
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 1500.0
+      },
+      "importance": {
+        "gain": 0.09052797247757337,
+        "shap": 0.1313311904668808
+      }
+    },
+    {
+      "order": 1,
+      "name": "CYCLO",
+      "type": "float",
+      "description": "McCabe Cyclomatic Complexity v(G)",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.49330434782500004,
+        "std": 0.3011580115765677,
+        "median": 0.47826087
+      },
+      "scaling_bounds": {
+        "min": 1.0,
+        "max": 25.0
+      },
+      "importance": {
+        "gain": 0.09384332304938135,
+        "shap": 0.030099861323833466
+      }
+    },
+    {
+      "order": 2,
+      "name": "LENGTH",
+      "type": "float",
+      "description": "Halstead Total Program Length (N1 + N2)",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.509783391014,
+        "std": 0.2897045092897745,
+        "median": 0.51384083
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 3000.0
+      },
+      "importance": {
+        "gain": 0.10395067796483418,
+        "shap": 0.13057303428649902
+      }
+    },
+    {
+      "order": 3,
+      "name": "VOLUME",
+      "type": "float",
+      "description": "Halstead Program Volume V",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.5059712067050001,
+        "std": 0.2913891910952922,
+        "median": 0.522551532
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 25000.0
+      },
+      "importance": {
+        "gain": 0.10866791550795718,
+        "shap": 0.1347617208957672
+      }
+    },
+    {
+      "order": 4,
+      "name": "DIFFICULTY",
+      "type": "float",
+      "description": "Halstead Difficulty D",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.502348980894,
+        "std": 0.2845721033269032,
+        "median": 0.511327881
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "importance": {
+        "gain": 0.10563136066527791,
+        "shap": 0.13324052095413208
+      }
+    },
+    {
+      "order": 5,
+      "name": "INT_FAN_IN",
+      "type": "float",
+      "description": "Internal Definitions / Entry Points",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.50355555558,
+        "std": 0.31597513320550297,
+        "median": 0.555555556
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 15.0
+      },
+      "importance": {
+        "gain": 0.08338273362418734,
+        "shap": 0.022377749904990196
+      }
+    },
+    {
+      "order": 6,
+      "name": "INT_FAN_OUT",
+      "type": "float",
+      "description": "Function / Method Invocations",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.510666666664,
+        "std": 0.3214003149218226,
+        "median": 0.555555556
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 25.0
+      },
+      "importance": {
+        "gain": 0.10683156111045124,
+        "shap": 0.023780886083841324
+      }
+    },
+    {
+      "order": 7,
+      "name": "NUM_OPERATORS",
+      "type": "float",
+      "description": "Total Operator Count N1",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.493987730075,
+        "std": 0.29513116735629363,
+        "median": 0.494887526
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 800.0
+      },
+      "importance": {
+        "gain": 0.09271358905584613,
+        "shap": 0.12856993079185486
+      }
+    },
+    {
+      "order": 8,
+      "name": "NUM_OPERANDS",
+      "type": "float",
+      "description": "Total Operand Count N2",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.512624999994,
+        "std": 0.2765715243573297,
+        "median": 0.517418033
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 800.0
+      },
+      "importance": {
+        "gain": 0.10762779507614685,
+        "shap": 0.13071252405643463
+      }
+    },
+    {
+      "order": 9,
+      "name": "BRANCH_COUNT",
+      "type": "float",
+      "description": "Decision Branch Count",
+      "stats": {
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.514642857133,
+        "std": 0.3143371820626884,
+        "median": 0.571428571
+      },
+      "scaling_bounds": {
+        "min": 0.0,
+        "max": 30.0
+      },
+      "importance": {
+        "gain": 0.10682307146834445,
+        "shap": 0.13455255329608917
+      }
+    }
+  ],
+  "reference_scaling": {
+    "LOC": {
+      "min": 0.0,
+      "max": 1500.0,
+      "desc": "Lines of Code"
+    },
+    "CYCLO": {
+      "min": 1.0,
+      "max": 25.0,
+      "desc": "McCabe Cyclomatic Complexity v(G)"
+    },
+    "LENGTH": {
+      "min": 0.0,
+      "max": 3000.0,
+      "desc": "Halstead Total Program Length (N1 + N2)"
+    },
+    "VOLUME": {
+      "min": 0.0,
+      "max": 25000.0,
+      "desc": "Halstead Program Volume V"
+    },
+    "DIFFICULTY": {
+      "min": 0.0,
+      "max": 100.0,
+      "desc": "Halstead Difficulty D"
+    },
+    "INT_FAN_IN": {
+      "min": 0.0,
+      "max": 15.0,
+      "desc": "Internal Definitions / Entry Points"
+    },
+    "INT_FAN_OUT": {
+      "min": 0.0,
+      "max": 25.0,
+      "desc": "Function / Method Invocations"
+    },
+    "NUM_OPERATORS": {
+      "min": 0.0,
+      "max": 800.0,
+      "desc": "Total Operator Count N1"
+    },
+    "NUM_OPERANDS": {
+      "min": 0.0,
+      "max": 800.0,
+      "desc": "Total Operand Count N2"
+    },
+    "BRANCH_COUNT": {
+      "min": 0.0,
+      "max": 30.0,
+      "desc": "Decision Branch Count"
+    }
+  }
+}

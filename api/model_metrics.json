@@ -1,0 +1,70 @@
+{
+  "model_type": "XGBoost Classifier",
+  "dataset_name": "SoftwareDefectDataset.csv",
+  "evaluation_timestamp": "2026-09-22T17:08:24.750952+00:00",
+  "train_samples": 800,
+  "test_samples": 200,
+  "feature_count": 10,
+  "feature_names": [
+    "LOC",
+    "CYCLO",
+    "LENGTH",
+    "VOLUME",
+    "DIFFICULTY",
+    "INT_FAN_IN",
+    "INT_FAN_OUT",
+    "NUM_OPERATORS",
+    "NUM_OPERANDS",
+    "BRANCH_COUNT"
+  ],
+  "cross_validation_5fold": {
+    "mean_accuracy": 0.66625,
+    "mean_precision": 0.2,
+    "mean_recall": 0.01146589259796807,
+    "mean_f1": 0.021567808409913673,
+    "mean_roc_auc": 0.5266191991945828,
+    "mean_pr_auc": 0.3454023970412708,
+    "mean_brier_score": 0.2232309177378565
+  },
+  "test_set_evaluation": {
+    "threshold": 0.5,
+    "accuracy": 0.675,
+    "precision": 0.5,
+    "recall": 0.015384615384615385,
+    "f1_score": 0.029850746268656716,
+    "roc_auc": 0.4700854700854701,
+    "pr_auc": 0.32489757326337776,
+    "brier_score": 0.2287488538903254,
+    "confusion_matrix": {
+      "true_negatives": 134,
+      "false_positives": 1,
+      "false_negatives": 64,
+      "true_positives": 1
+    }
+  },
+  "test_set_evaluation_optimized_threshold": {
+    "threshold": 0.17,
+    "accuracy": 0.325,
+    "precision": 0.32323232323232326,
+    "recall": 0.9846153846153847,
+    "f1_score": 0.4866920152091255,
+    "roc_auc": 0.4700854700854701,
+    "pr_auc": 0.32489757326337776,
+    "confusion_matrix": {
+      "true_negatives": 1,
+      "false_positives": 134,
+      "false_negatives": 1,
+      "true_positives": 64
+    }
+  },
+  "xgboost_config": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.03,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "scale_pos_weight": 1.0,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0
+  }
+}

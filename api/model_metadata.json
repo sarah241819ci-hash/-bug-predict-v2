@@ -1,0 +1,43 @@
+{
+  "model_name": "Bug Predict XGBoost Defect Classifier",
+  "version": "2.1.0",
+  "model_type": "Gradient Boosted Decision Trees (XGBoost)",
+  "dataset": "Kaggle Software Defect Prediction (PROMISE / NASA MDP)",
+  "target": "DEFECT_LABEL",
+  "training_date": "2026-09-22T17:08:24.754134+00:00",
+  "training_samples": 800,
+  "test_samples": 200,
+  "total_samples": 1000,
+  "features": [
+    "LOC",
+    "CYCLO",
+    "LENGTH",
+    "VOLUME",
+    "DIFFICULTY",
+    "INT_FAN_IN",
+    "INT_FAN_OUT",
+    "NUM_OPERATORS",
+    "NUM_OPERANDS",
+    "BRANCH_COUNT"
+  ],
+  "decision_threshold": 0.17,
+  "xgboost_parameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.03,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "scale_pos_weight": 1.0,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0
+  },
+  "test_metrics": {
+    "accuracy": 0.675,
+    "precision": 0.5,
+    "recall": 0.015384615384615385,
+    "f1_score": 0.029850746268656716,
+    "roc_auc": 0.4700854700854701,
+    "pr_auc": 0.32489757326337776
+  },
+  "limitations": "This system predicts software defect risk from static code complexity metrics using an XGBoost model trained on the selected software defect dataset. Analysis reveals that the training dataset has weak linear and non-linear predictive correlation (ROC-AUC ~0.48-0.53 across Linear, Forest, and Boosting models). The prediction is a model-based risk estimate and must be treated as a heuristic decision-support signal rather than a certainty."
+}

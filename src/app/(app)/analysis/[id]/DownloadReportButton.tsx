@@ -73,7 +73,7 @@ export default function DownloadReportButton({ analysis }: { analysis: any }) {
         
         autoTable(doc, {
           startY: finalY + 20,
-          head: [['File Path', 'Defect Probability', 'Why It Is Risky (Gemini AI)', 'Recommended Action']],
+          head: [['File Path', 'Predicted Defect Risk', 'Why It Is Risky (Gemini AI)', 'Recommended Action']],
           body: aiBody,
           theme: 'grid',
           styles: { fontSize: 8, cellPadding: 3 },
@@ -97,7 +97,7 @@ export default function DownloadReportButton({ analysis }: { analysis: any }) {
       doc.setFontSize(10);
       doc.setTextColor(100, 116, 139);
       doc.text(
-        "This analysis was performed using an XGBoost Machine Learning model trained on the Kaggle Software Defect Prediction dataset. The risk scores are raw defect probabilities.",
+        "This analysis was performed using an XGBoost Machine Learning model trained on static software complexity metrics. Risk scores represent model-based risk estimates for decision support rather than certainty.",
         14, 28, { maxWidth: 180 }
       );
 

@@ -43,5 +43,14 @@ next-env.d.ts
 
 .vercel
 .env*
-"__pycache__/" 
-"*.pyc" 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+scratch/
+test_api.py
+test_train.py
